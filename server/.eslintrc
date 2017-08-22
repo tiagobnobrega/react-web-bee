@@ -1,0 +1,14 @@
+{
+  "env": {
+    "node": true
+  },
+
+  "globals": {
+    "process": false,
+    "require": false
+  },
+
+  "extends": "airbnb-base",
+
+  "parser": "babel-eslint"
+}
