@@ -1,26 +1,33 @@
-require('dotenv').config();
-const path = require('path');
-const express = require('express');
-const bodyParser = require('body-parser');
-// const jsonServer = require('json-server');
-const chalk = require('chalk');
-
-// const MOCK_DB = './src/mockJson/mock.json';
-
-if (typeof Map !== 'function') {
-  throw new Error('ES6 is required; add --harmony');
-}
-
-// Configurar variaveis de ambiente
 const ENV = require('./config/ENV');
+const path = require('path');
+const chalk = require('chalk');
+const http = require('http');
+const Koa = require('koa');
+const err = require('./middleware/error');
+const serve = require('koa-static');
+const { routes, allowedMethods } = require('./controller');
 
-const publicDir = path.join(__dirname, 'public');
+const app = new Koa();
+// define public static dir
+const publicDir = path.join(__dirname, ENV.PUBLIC_DIR);
 
-// Inicializar express
-const app = express();
-app.use(bodyParser.json());
+// Error middleware
+app.use(err);
+// load routes
+app.use(routes());
+// define routes allowedMethods
+app.use(allowedMethods());
+// serve static content
+// app.use(serve(publicDir));
+
+// Start server
+http.createServer(app.callback()).listen(ENV.PORT, () => {
+  console.log(chalk.green(`${ENV.name} listening at port ${ENV.PORT}`));
+});
+
+
 // servir conteúdo estático
-app.use(express.static(publicDir));
+// app.use(express.static(publicDir));
 
 // montar endpoint de mock
 // app.use('/mock', jsonServer.router(MOCK_DB));
@@ -31,10 +38,10 @@ app.use(express.static(publicDir));
 // registrar proxy-middleware
 // app.use('/api/**', [Logger, ApiAuth]);
 
-app.get('/health', (req, res) => {
-  res.status(200)
-    .send(JSON.stringify({ status: 'ok' }));
-});
+// app.get('/health', (req, res) => {
+//   res.status(200)
+//     .send(JSON.stringify({ status: 'ok' }));
+// });
 
 // registrar controllers
 // const controllers = require('./server/controller');
@@ -68,8 +75,8 @@ app.get('/health', (req, res) => {
 //     });
 // });
 
-const server = app.listen(ENV.PORT, (err) => {
-  if (err) console.error(err);
-  const startMessage = `Server listening port : ${server.address().port}`;
-  console.log(chalk.green(startMessage));
-});
+// const server = app.listen(ENV.PORT, (err) => {
+//   if (err) console.error(err);
+//   const startMessage = `Server listening port : ${server.address().port}`;
+//   console.log(chalk.green(startMessage));
+// });
