@@ -17,9 +17,9 @@ const controllers = requireAll({
   recursive: true,
 });
 
-Object.entries(controllers).forEach((pair) => {
-  const name = pair[0];
-  const controller = pair[1];
+Object.entries(controllers).forEach((entry) => {
+  const name = entry[0];
+  const controller = entry[1];
   if (!(controller instanceof WebBeeController)) {
     console.warn(`Module ${name} is not instance of WebBeeController, ignoring...`);
   } else {

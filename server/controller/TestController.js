@@ -1,7 +1,7 @@
 const WebBeeController = require('./WebBeeController');
 
 const tc = new WebBeeController('/api/test');
-//CREATE NeDB Controller for mock pruposes
+// CREATE NeDB Controller for mock pruposes
 tc
   .use('GET', 'test1')((ctx) => {
     console.log(`ctx=${JSON.stringify(ctx)}`);

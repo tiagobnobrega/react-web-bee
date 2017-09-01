@@ -29,7 +29,7 @@ class WebBeeController {
   }
 
   static isValidHttpMethod(method) {
-    const foundMethod = Object.keys(WebBeeController.METHODS).find(key => key === method);
+    const foundMethod = WebBeeController.METHODS[method];
     return !!foundMethod;
   }
 
