@@ -24,10 +24,10 @@ Object.entries(controllers).forEach((entry) => {
     console.warn(`Module ${name} is not instance of WebBeeController, ignoring...`);
   } else {
     controller.getMethods().forEach((method) => {
-      console.log(`registering controller uri: ${JSON.stringify(method)}`);
+      // console.log(`registering controller uri: ${JSON.stringify(method)}`);
       method.httpMethods
         .forEach((httpMethod) => {
-          console.log(`registering controller uri: ${httpMethod}:${method.path}`);
+          // console.log(`registering controller uri: ${httpMethod}:${method.path}`);
           router[httpMethod](method.path, KoaBody(), method.fn);
         });
       router.get(method.path, KoaBody(), method.fn);
@@ -39,14 +39,14 @@ Object.entries(controllers).forEach((entry) => {
 
 // console.log('controllers:',controllers);
 
-const log = route => async (ctx, next) => {
-  console.log(`hit:${route}`);
-  console.log(`ctx.request:${JSON.stringify(ctx.request.body)}`);
-  ctx.body = { foo: 'bar', route };
-  await next();
-};
-
-router.get('/users', log('GET users'));
+// const log = route => async (ctx, next) => {
+//   console.log(`hit:${route}`);
+//   console.log(`ctx.request:${JSON.stringify(ctx.request.body)}`);
+//   ctx.body = { foo: 'bar', route };
+//   await next();
+// };
+//
+// router.get('/users', log('GET users'));
 
 // Criar controllers dinamicamente, e registrar nas rotas
 // router

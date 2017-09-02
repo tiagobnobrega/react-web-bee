@@ -18,7 +18,7 @@ app.use(routes());
 // define routes allowedMethods
 app.use(allowedMethods());
 // serve static content
-// app.use(serve(publicDir));
+app.use(serve(publicDir));
 
 // Start server
 http.createServer(app.callback()).listen(ENV.PORT, () => {

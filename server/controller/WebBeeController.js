@@ -1,9 +1,19 @@
+const _ = require('lodash');
+
 class WebBeeController {
 
   constructor(requestMapping) {
     this.globalRequestMapping = `/${requestMapping || ''}/`;
     this.globalRequestMapping = this.globalRequestMapping.replace('//', '/');
     this.methods = [];
+  }
+
+  config(paramConfig) {
+    const configs = _.castArray(paramConfig);
+    configs.forEach((c) => {
+      const { path, methods, run } = c;
+      this.use(methods, path)(run);
+    });
   }
 
   use(argHttpMethods, path) {
