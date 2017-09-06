@@ -5,6 +5,7 @@ const http = require('http');
 const Koa = require('koa');
 const err = require('./middleware/error');
 const serve = require('koa-static');
+const mgmt = require('./middleware/mgmt');
 const { routes, allowedMethods } = require('./controller');
 
 const app = new Koa();
@@ -17,6 +18,8 @@ app.use(err);
 app.use(routes());
 // define routes allowedMethods
 app.use(allowedMethods());
+// loadr mgmt routes
+app.use(mgmt);
 // serve static content
 app.use(serve(publicDir));
 

@@ -61,4 +61,6 @@ Object.entries(controllers).forEach((entry) => {
 module.exports = {
   routes() { return router.routes(); },
   allowedMethods() { return router.allowedMethods(); },
+  controllers,
+  WebBeeController,
 };
