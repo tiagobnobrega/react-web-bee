@@ -1,10 +1,14 @@
+// Basic imports
 const ENV = require('./config/ENV');
 const path = require('path');
 const chalk = require('chalk');
+// Server imports
 const http = require('http');
 const Koa = require('koa');
+// Middlewares
 const err = require('./middleware/error');
 const serve = require('koa-static');
+const historyFallback = require('./middleware/history-fallback');
 const mgmt = require('./middleware/mgmt');
 const { routes, allowedMethods } = require('./controller');
 
@@ -18,7 +22,9 @@ app.use(err);
 app.use(routes());
 // define routes allowedMethods
 app.use(allowedMethods());
-// loadr mgmt routes
+// use history-api-fallback
+// app.use(historyFallback());
+// load mgmt routes
 app.use(mgmt);
 // serve static content
 app.use(serve(publicDir));
