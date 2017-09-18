@@ -1,3 +1,6 @@
+/**
+ * This file dynamically reads "*Store.js" files and exports them
+ */
 const requireAll = require('require-all');
 
 const stores = requireAll({

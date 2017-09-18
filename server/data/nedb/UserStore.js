@@ -1,3 +1,8 @@
+/**
+ * Sample Store implementation for users. Other methods may be added and
+ * validation con be overriden
+ */
+
 const Datastore = require('nedb');
 const _ = require('lodash');
 const assert = require('assert');

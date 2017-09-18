@@ -1,4 +1,9 @@
 /* eslint no-underscore-dangle: 0 */  // needs this for mongo like _id
+/**
+ * Base implementation for NeDB Stores. This class implements basic CRUD services.
+ * @type {_}
+ * @private
+ */
 const _ = require('lodash');
 const { promisify } = require('util');
 

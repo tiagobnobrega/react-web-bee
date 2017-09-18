@@ -1,3 +1,7 @@
+/**
+ * Implementação de store de currency
+ */
+
 const Datastore = require('nedb');
 const _ = require('lodash');
 const assert = require('assert');
