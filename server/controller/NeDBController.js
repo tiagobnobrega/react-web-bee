@@ -31,9 +31,6 @@ const connectStoreMethods = (controller, stores) => {
       .use('GET', `${basePath}/compact`)(async (ctx) => {
         store.compact();
         ctx.body = { status: 'ok' };
-      })
-      .use('GET', 'test2')((ctx) => {
-        console.log(`TestController@test2${ctx.request.url}`);
       });
   };
 

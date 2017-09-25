@@ -22,12 +22,12 @@ app.use(err);
 app.use(routes());
 // define routes allowedMethods
 app.use(allowedMethods());
-// use history-api-fallback
-// app.use(historyFallback());
 // load mgmt routes
 app.use(mgmt);
 // serve static content
 app.use(serve(publicDir));
+// use history-api-fallback
+app.use(historyFallback());
 
 // Start server
 http.createServer(app.callback()).listen(ENV.PORT, () => {
