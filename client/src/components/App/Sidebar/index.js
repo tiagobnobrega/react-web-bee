@@ -20,6 +20,7 @@ class AppSidebar extends React.Component{
       <Menu>
         <Link className="menu-item" to="/home">Home</Link>
         <Link className="menu-item" to="/about">About</Link>
+        <Link className="menu-item" to="/projects">Projects</Link>
         <Link className="menu-item" to="/notDefinedRoute">Not Found</Link>
         <a onClick={ this.doNotNavigate } className="menu-item--small" href="">No Navigation</a>
         <button onClick={()=> props.changePage('home')} className="menu-item--small">Home via redux</button>

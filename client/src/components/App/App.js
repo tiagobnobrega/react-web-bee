@@ -5,9 +5,10 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import axios from 'axios';
 
-import NotFound from '../NotFound';
-import Home from '../Home';
-import About from '../About';
+import NotFound from '../../containers/NotFound';
+import Home from '../../containers/Home';
+import About from '../../containers/About';
+import ProjectList from '../../containers/Projects';
 
 class App extends Component {
 
@@ -36,6 +37,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/home"  component={Home}/>
               <Route exact path="/about" component={About}/>
+              <Route exact path="/projects" component={ProjectList}/>
 
               <Redirect exact from="/" to="/home"/>
               <Route component={NotFound}/>
