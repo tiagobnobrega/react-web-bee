@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Route, Link, Switch, Redirect} from 'react-router-dom';
 import './style.css';
 import Sidebar from './Sidebar';
 import Header from './Header';
@@ -12,22 +12,21 @@ import ProjectList from '../../containers/Projects';
 
 class App extends Component {
 
-  constructor(){
+  constructor() {
     super();
-    this.state={status:null};
+    this.state = {status: null};
   }
 
-  componentDidMount(){
+  componentDidMount() {
     axios.get("/health")
-      .then((resp)=>{
+      .then((resp) => {
         console.log(resp);
       })
-      .catch((err)=>console.error('Error  requesting status node server might not be running' ,err))
+      .catch((err) => console.error('Error  requesting status node server might not be running', err))
   }
 
   render() {
-    const { ...props } = this.props;
-    console.log("App.js");
+    const {...props} = this.props;
     return (
       <div className="App" id="app-outer-container">
         <Sidebar />
@@ -35,7 +34,7 @@ class App extends Component {
           <Header />
           <main>
             <Switch>
-              <Route exact path="/home"  component={Home}/>
+              <Route exact path="/home" component={Home}/>
               <Route exact path="/about" component={About}/>
               <Route exact path="/projects" component={ProjectList}/>
 
