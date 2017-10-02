@@ -27,6 +27,11 @@ const connectStoreMethods = (controller, stores) => {
         const numDocs = await store.update(docs);
         ctx.body = { data: { count: numDocs } };
       })
+      .use('POST', `${basePath}/remove`)(async (ctx) => {
+        const ids = ctx.request.body;
+        const numDocs = await store.remove(ids);
+        ctx.body = { data: { count: numDocs } };
+      })
       // Compact DB
       .use('GET', `${basePath}/compact`)(async (ctx) => {
         store.compact();

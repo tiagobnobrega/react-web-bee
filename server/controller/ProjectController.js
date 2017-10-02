@@ -14,12 +14,22 @@ ctrl.config([
     },
   },
   {
-    path: 'insert',
+    path: 'save',
     methods: 'POST,PUT,PATCH',
     run: async (ctx) => {
       const docs = ctx.request.body;
-      const inserted = await ProjectStore.insert(docs);
+      const inserted = await ProjectStore.save(docs);
       ctx.body = { data: { count: inserted.length, inserted } };
+      ctx.status = 200;
+    },
+  },
+  {
+    path: 'remove',
+    methods: 'POST,PUT,PATCH',
+    run: async (ctx) => {
+      const ids = ctx.request.body;
+      const removed = await ProjectStore.remove(ids);
+      ctx.body = { data: { count: removed } };
       ctx.status = 200;
     },
   },

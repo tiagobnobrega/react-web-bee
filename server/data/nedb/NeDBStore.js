@@ -45,6 +45,23 @@ class NeDBStore {
     return Promise.all(promises).then(values => values.reduce((a, b) => a + b, 0));
   }
 
+  removeOne(id) {
+    if (!id) throw new Error('No id passed for delete.');
+    // return new Promise((resolve, reject) => this.db()
+    //   .update({ _id: doc._id }, doc, {}, handleCallbackAsPromise(resolve, reject)));
+    return promisify(this.db().remove.bind(this.db()))({ _id: id });
+    // db.remove(query, options, callback)
+  }
+
+  remove(idsParam) {
+    let ids = idsParam;
+    if (!_.isArray(idsParam)) {
+      ids = [idsParam];
+    }
+    const promises = ids.map(id => this.removeOne(id));
+    return Promise.all(promises).then(values => values.reduce((a, b) => a + b, 0));
+  }
+
   find(query) {
     // return new Promise((resolve, reject) => this.db()
     //   .find(query, handleCallbackAsPromise(resolve, reject)));
