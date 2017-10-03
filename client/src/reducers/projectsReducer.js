@@ -7,6 +7,7 @@ const initialState = {
 
 export default function reducer(state = initialState, {type, payload, meta}) {
   const actionType = type || "DEFAULT";
+  console.log("Action:",{type, payload, meta});
   const handlers = {
     [TYPES.PROJECT_GET_ALL]:()=>{
       return Object.assign({},state,{isFetching:true})

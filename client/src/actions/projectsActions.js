@@ -27,12 +27,14 @@ const actions = {
       }
     }
   },
+  // If you want to use promise-middleware with axios, you can. You just have to remove the request property
   'getProjectByCode': (code) => {
     return {
       type: TYPES.PROJECT_GET_ONE,
       payload: {
         promise: axios.get('/api/project/findByCode/'+code).then((r)=>{
-          delete r.request;// se retornar um objeto request o middleware do axios tenta realizar a requisição
+          r._request = r.request;
+          delete r.request;
           return r;
         })
       }
