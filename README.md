@@ -1,45 +1,73 @@
 #TODO README
 
-##Configuração npm
+##Running the Project
 
-###Definir padrões globais
+###npm Scripts
+####start
+Start server project only. Should be used for production.
+    
+    > npm start
+####dev
+Starts server project in dev mode (nodemon) and client project (webpack) with aggregated console
+ 
+     > npm run dev
+####dev-split
+   Starts server project in dev mode (nodemon) and client project (webpack) with splitted console
+   
+       > npm run dev-split
+####build
+   Starts client webpack build process
 
-//Não criar package-lock<br/>
-npm config set package-lock false
+    > npm run build
 
-##Configuração Webstorm
+####dev-client
+   Starts server project in production mode and client project (webpack)
+
+    > npm run dev-client
+    
+####dev-client
+   Starts client project (webpack) only
+       
+    > npm run client
+    
+    
+##npm Configuration
+
+###Global npm configuration
+
+Don't create package-lock file <br/>
+
+    > npm config set package-lock false
+
+##Webstorm configuration
 ###Eslint fix command
 
-Para configurar o comando o eslint deve estar instalado de forma global
+To configure eslint commend. eslint must be installed globally
 
->npm install eslint -g
+    > npm install eslint -g
 
-Será necessário descobrir o caminho completo de instalacao do eslint
+We need to know install full path:
 
->npm config get prefix
+    >npm config get prefix
 
-O caminho completo será: "<NPM_PREFIX>\eslint"
+full path is: "<NPM_PREFIX>\eslint"
  
-No windows por exemplo: "C:\Program Files\nodejs\eslint.cmd"
+Windows example: "C:\Program Files\nodejs\eslint.cmd"
 
-Acessar: File => Settings => Tools => External Tools
+Access: File => Settings => Tools => External Tools
 
-Criar um novo commando
+Create new command
 
-<CAMINHO_COMPLETO_ESLINT> "$FilePath$" --fix
+<ESLINT_FULL_PATH> "$FilePath$" --fix
 
 * Parameter:
   --fix "$FilePath$"
 * Working Directory:
   $ProjectFileDir$
   
-Para facilitar o desenvolvimento, registr um keymap:
+You can also register a keymap:
 
-Acessar: File => Settings => Keymap
+Access: File => Settings => Keymap
 
-1. Ecnontrar o comando criado em "External Tools"
-1. Adcionar atalho de teclado
-
-
-
-
+1. Find command in "External Tools"
+1. Add keyboard shortcut

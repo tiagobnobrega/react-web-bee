@@ -1,0 +1,40 @@
+{
+  "name": "react-web-bee",
+  "version": "1.0.0",
+  "description": "Server + client javascript boilerplate project",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "4.3.0",
+    "eslint-config-airbnb": "15.1.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-react": "7.1.0",
+    "eslint-plugin-jsx-a11y": "5.1.1"
+  },
+  "devDependencies": {
+    "npm-run-all": "4.1.1"
+  },
+  "scripts": {
+    "start": "npm run server",
+    "dev": "run-p -n server-devmode client",
+    "dev-split": "start npm run client && start npm run server-devmode",
+    "build": "cd ./client && npm run build",
+    "dev-client": "run-p -n server client",
+    "server": "cd ./server && npm start",
+    "server-devmode": "cd ./server && npm run dev",
+    "client": "cd ./client && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://tnobrega@bitbucket.org/9beejava/react-web-bee.git"
+  },
+  "keywords": [
+    "9bee",
+    "react",
+    "koa",
+    "web"
+  ],
+  "author": "Tiago Nobrega",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/9beejava/react-web-bee#readme"
+}

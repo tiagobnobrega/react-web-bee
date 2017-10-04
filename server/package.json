@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"implement tests\"",
     "start": "node index.js",
+    "dev": "nodemon",
     "eslint": "eslint **/*.js"
   },
   "engines": {
@@ -36,6 +37,7 @@
     "babel-eslint": "7.2.3",
     "eslint": "4.5.0",
     "eslint-config-airbnb-base": "11.3.2",
-    "eslint-plugin-import": "2.7.0"
+    "eslint-plugin-import": "2.7.0",
+    "nodemon": "1.12.1"
   }
 }
