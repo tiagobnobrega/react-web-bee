@@ -1,7 +1,7 @@
 {
   "name": "react-web-bee",
   "version": "1.0.0",
-  "description": "Server + client javascript boilerplate project",
+  "description": "Koajs + React with Redux javascript boilerplate project",
   "main": "index.js",
   "dependencies": {
     "eslint": "4.3.0",

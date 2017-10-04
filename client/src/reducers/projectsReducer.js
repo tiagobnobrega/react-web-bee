@@ -1,28 +1,27 @@
 import {TYPES} from '../actions/projectsActions';
+import {createReducer} from 'reduxsauce';
+// import { Types as ReduxSauceTypes } from 'reduxsauce';
 
-const initialState = {
-  all:[],
+// the initial state of this reducer
+export const INITIAL_STATE = {
+  all: [],
   isFetching: false,
 };
 
-export default function reducer(state = initialState, {type, payload, meta}) {
-  const actionType = type || "DEFAULT";
-  console.log("Action:",{type, payload, meta});
-  const handlers = {
-    [TYPES.PROJECT_GET_ALL]:()=>{
-      return Object.assign({},state,{isFetching:true})
-    },
-    [TYPES.PROJECT_GET_ALL_SUCCESS]: () => {
-      // return [{name: "Projeto-1"}, {name: "Projeto-2"}, {name: "Projeto-3"},]
-      return {
-        all: payload.data.data,
-        isFetching: false,
-      }
-    },
-    "DEFAULT": () => state
-  };
-
-  const handler = handlers[actionType] || handlers["DEFAULT"];
-  return handler();
+export const HANDLERS = {
+  [TYPES.PROJECT_GET_ALL]: (state = INITIAL_STATE, {type, payload, meta}) => {
+    return Object.assign({}, state, {isFetching: true})
+  },
+  [TYPES.PROJECT_GET_ALL_SUCCESS]: (state = INITIAL_STATE, {type, payload, meta}) => {
+    // return [{name: "Projeto-1"}, {name: "Projeto-2"}, {name: "Projeto-3"},]
+    return {
+      all: payload.data.data,
+      isFetching: false,
+    }
+  },
+  //If you need to process non listed actions
+  // [ReduxSauceTypes.DEFAULT]: (state = INITIAL_STATE)=> state
 };
 
+
+export default createReducer(INITIAL_STATE, HANDLERS);
