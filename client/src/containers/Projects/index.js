@@ -26,8 +26,11 @@ class Projects extends React.Component {
 
   handleSubmitSelectedProject(selectedProject){
     this.props.saveProject(selectedProject)
-      .then(()=>this.props.getAllProjects())
-      .then(()=>this.props.getProjectByCode(selectedProject.code));
+      .then(()=>{
+        this.props.getAllProjects();
+        this.props.getProjectByCode(selectedProject.code)
+    });
+      // .then(()=>this.props.getProjectByCode(selectedProject.code));
 
     // this.props.getProjectByCode(code);
     // console.log('selectedProject:',selectedProject);
@@ -66,6 +69,7 @@ class Projects extends React.Component {
   }
 
   render() {
+
     const { projects, selectedProject } = this.props;
     return (
       <div>

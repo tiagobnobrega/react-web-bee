@@ -1,6 +1,7 @@
 const WebBeeController = require('./WebBeeController');
 const neDbStores = require('../data/nedb');
 
+
 const connectStoreMethods = (controller, stores) => {
   const appendStore = (store, basePath) => {
     controller

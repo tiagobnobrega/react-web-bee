@@ -35,9 +35,11 @@ Starts server project in dev mode (nodemon) and client project (webpack) with ag
 
 ###Global npm configuration
 
-Don't create package-lock file <br/>
+Don't create package-lock file | save by default | save exact version <br/>
 
     > npm config set package-lock false
+    > npm config set save true
+    > npm config set save-exact true
 
 ##Webstorm configuration
 ###Eslint fix command
