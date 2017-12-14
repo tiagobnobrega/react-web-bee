@@ -6,29 +6,29 @@
 ####start
 Start server project only. Should be used for production.
     
-    > npm start
+    npm start
 ####dev
 Starts server project in dev mode (nodemon) and client project (webpack) with aggregated console
  
-     > npm run dev
+     npm run dev
 ####dev-split
    Starts server project in dev mode (nodemon) and client project (webpack) with splitted console
    
-       > npm run dev-split
+    npm run dev-split
 ####build
    Starts client webpack build process
 
-    > npm run build
+    npm run build
 
 ####dev-client
    Starts server project in production mode and client project (webpack)
 
-    > npm run dev-client
+    npm run dev-client
     
 ####dev-client
    Starts client project (webpack) only
        
-    > npm run client
+    npm run client
     
     
 ##npm Configuration
@@ -37,20 +37,20 @@ Starts server project in dev mode (nodemon) and client project (webpack) with ag
 
 Don't create package-lock file | save by default | save exact version <br/>
 
-    > npm config set package-lock false
-    > npm config set save true
-    > npm config set save-exact true
+    npm config set package-lock false
+    npm config set save true
+    npm config set save-exact true
 
 ##Webstorm configuration
 ###Eslint fix command
 
 To configure eslint commend. eslint must be installed globally
 
-    > npm install eslint -g
+    npm install eslint -g
 
 We need to know install full path:
 
-    >npm config get prefix
+    npm config get prefix
 
 full path is: "<NPM_PREFIX>\eslint"
  
@@ -73,3 +73,20 @@ Access: File => Settings => Keymap
 
 1. Find command in "External Tools"
 1. Add keyboard shortcut
+
+##Dev Tools Configurations
+
+Recomended packages:
+    
+#### nodemon
+    npm install -g nodemon
+    
+#### local ssl proxy
+    npm install -g local-ssl-proxy
+
+#### windows build tools
+(Run as admin)
+
+        npm install --global --production windows-build-tools
+        
+ 
