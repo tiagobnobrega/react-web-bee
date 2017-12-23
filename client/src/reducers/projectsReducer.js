@@ -1,6 +1,5 @@
 import {TYPES} from '../actions/projectsActions';
-import {createReducer} from 'reduxsauce';
-// import { Types as ReduxSauceTypes } from 'reduxsauce';
+import {handleActions} from 'redux-actions';
 
 // the initial state of this reducer
 export const INITIAL_STATE = {
@@ -19,9 +18,7 @@ export const HANDLERS = {
       isFetching: false,
     }
   },
-  //If you need to process non listed actions
-  // [ReduxSauceTypes.DEFAULT]: (state = INITIAL_STATE)=> state
 };
 
 
-export default createReducer(INITIAL_STATE, HANDLERS);
+export default handleActions(HANDLERS,INITIAL_STATE);

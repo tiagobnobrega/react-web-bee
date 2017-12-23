@@ -1,65 +1,50 @@
 import axios from 'axios';
-import {SUCCESS, FAIL} from './optmistic-update-types';
-import {createTypes} from 'reduxsauce';
+import {createAction} from 'redux-actions';
 
-let TYPES = createTypes(`
-  PROJECT_GET_ALL
-  PROJECT_GET_ALL${SUCCESS}
-  PROJECT_GET_ALL${FAIL}
-  PROJECT_SELECT
-  PROJECT_GET_ONE
-  PROJECT_GET_ONE${SUCCESS}
-  PROJECT_GET_ONE${FAIL}
-  PROJECT_SAVE
-  PROJECT_SAVE${SUCCESS}
-  PROJECT_SAVE${FAIL}
-`,
-  {});
+const TYPES = {
+  'PROJECT_GET_ALL': `PROJECT_GET_ALL`,
+  'PROJECT_GET_ALL_SUCCESS': `PROJECT_GET_ALL_SUCCESS`,
+  'PROJECT_GET_ALL_FAIL': `PROJECT_GET_ALL_SUCCESS`,
+  'PROJECT_SELECT': `PROJECT_SELECT`,
+  'PROJECT_GET_ONE': `PROJECT_GET_ONE`,
+  'PROJECT_GET_ONE_SUCCESS': `PROJECT_GET_ONE_SUCCESS`,
+  'PROJECT_GET_ONE_FAIL': `PROJECT_GET_ONE_FAIL`,
+  'PROJECT_SAVE': `PROJECT_SAVE`,
+  'PROJECT_SAVE_SUCCESS': `PROJECT_SAVE_SUCCESS`,
+  'PROJECT_SAVE_FAIL': `PROJECT_SAVE_FAIL`,
+};
+
 
 const actions = {
-  'getAllProjects': () => {
-    //using axios middleware with default client
+  'getAllProjects': createAction(TYPES.PROJECT_GET_ALL, () => {
     return {
-      type: TYPES.PROJECT_GET_ALL,
-      payload: {
-        request: {
-          url: '/api/project/all'
-        }
+      request: {
+        url: '/api/project/all'
       }
     }
-  },
-  // If you want to use promise-middleware with axios, you can. You just have to remove the request property
-  'getProjectByCode': (code) => {
+  }),
+  'getProjectByCode': createAction(TYPES.PROJECT_GET_ONE, (code) => {
     return {
-      type: TYPES.PROJECT_GET_ONE,
-      payload: {
-        promise: axios.get('/api/project/findByCode/' + code).then((r) => {
-          r._request = r.request;
-          delete r.request;
-          return r;
-        })
+            promise: axios.get('/api/project/findByCode/' + code).then((r) => {
+              r._request = r.request;
+              delete r.request;
+              return r;
+            })
+          }
+  }),
+
+  'setSelectedProject': createAction(TYPES.PROJECT_SELECT,project=>project),
+  'saveProject': createAction(TYPES.PROJECT_SAVE, (project) => {
+    return {
+      request: {
+        method: 'post',
+        url: '/api/project/save',
+        data: project
       }
     }
-  },
-  'setSelectedProject': (project) => {
-    return {
-      type: TYPES.PROJECT_SELECT,
-      payload: project
-    }
-  },
-  'saveProject': (project) => {
-    //using axios middleware with default client
-    return {
-      type: TYPES.PROJECT_SAVE,
-      payload: {
-        request: {
-          method: 'post',
-          url: '/api/project/save',
-          data: project
-        }
-      }
-    }
-  }
+  }),
 };
+
+console.log('projectActions', actions.getAllProjects());
 
 export {actions, TYPES};
