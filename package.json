@@ -8,20 +8,20 @@
   },
   "scripts": {
     "postinstall": "run-s -n client-install server-install",
-    "start": "pnpm run server",
+    "start": "yarn run server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "run-p -n server-dev client",
-    "build": "cd ./client && pnpm run build",
+    "build": "cd ./client && yarn run build",
 
-    "dev-split": "start pnpm run client && start pnpm run server-dev",
+    "dev-split": "start yarn run client && start yarn run server-dev",
     "dev-client": "run-p -n server client",
 
-    "server": "cd ./server && pnpm start",
-    "server-dev": "cd ./server && pnpm run dev",
-    "server-install": "cd ./server && pnpm install",
+    "server": "cd ./server && yarn start",
+    "server-dev": "cd ./server && yarn run dev",
+    "server-install": "cd ./server && yarn install",
 
-    "client": "cd ./client && pnpm start",
-    "client-install": "cd ./client && pnpm install"
+    "client": "cd ./client && yarn start",
+    "client-install": "cd ./client && yarn install"
 
   },
   "repository": {
