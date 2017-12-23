@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {createAction} from 'redux-actions';
 
 export const TYPES = {

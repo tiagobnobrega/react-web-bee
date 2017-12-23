@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route, Link, Switch, Redirect} from 'react-router-dom';
+import {Route,  Switch, Redirect} from 'react-router-dom';
 import './style.css';
 import Sidebar from './Sidebar';
 import Header from './Header';
@@ -26,7 +26,6 @@ class App extends Component {
   }
 
   render() {
-    const {...props} = this.props;
     return (
       <div className="App" id="app-outer-container">
         <Sidebar />

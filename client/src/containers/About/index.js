@@ -10,7 +10,6 @@ export default class About extends Component {
   // state = {}
 
   render() {
-    const {...props} = this.props;
     return (
       <div>
         <h1>

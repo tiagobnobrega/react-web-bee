@@ -1,8 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { sagaMiddleware,initSagas } from './sagas-middleware'
-import promiseMiddleware from './promise-middleware';
-import axiosMiddleware from './axios-middleware';
 
 import createHistory from 'history/createBrowserHistory';
 import rootReducer from '../reducers/index';
@@ -17,8 +15,6 @@ const enhancers = [];
 
 //define middleware array
 const middleware = [
-  // promiseMiddleware,
-  // axiosMiddleware,
   routerMiddleware(history),
   sagaMiddleware,
 ];
