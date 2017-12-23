@@ -53,6 +53,10 @@ class NeDBStore {
     // db.remove(query, options, callback)
   }
 
+  removeQuery(query) {
+    return promisify(this.db().remove.bind(this.db()))(query);
+  }
+
   remove(idsParam) {
     let ids = idsParam;
     if (!_.isArray(idsParam)) {

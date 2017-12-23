@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
+import _set from 'lodash/set';
+import _stubTrue from 'lodash/stubTrue';
 
 
 export default class ProjectDetailForm extends Component {
@@ -15,10 +16,10 @@ export default class ProjectDetailForm extends Component {
       _id: _id,
       isNew: isNew,
     };
-    this.onSubmitCallback = onSubmit || _.stubTrue;
-    this.onDeleteCallback = onDelete || _.stubTrue;
-    this.onCloseCallback = onClose || _.stubTrue;
-    this.onChangeCallback = onChange || _.stubTrue;
+    this.onSubmitCallback = onSubmit || _stubTrue;
+    this.onDeleteCallback = onDelete || _stubTrue;
+    this.onCloseCallback = onClose || _stubTrue;
+    this.onChangeCallback = onChange || _stubTrue;
 
     //common binds
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -35,7 +36,7 @@ export default class ProjectDetailForm extends Component {
     const {value, name} = el;
     if (!name) console.warn("handleFormInput:: Elements has no name defined");
     let changed = {};
-    _.set(changed, name, value);
+    _set(changed, name, value);
     this.handleUpdate(changed);
   }
 
@@ -58,7 +59,7 @@ export default class ProjectDetailForm extends Component {
   }
 
   handleDelete() {
-    if (window.confirm("Tem certeza que deseja excluir?")) {
+    if (window.confirm("Are you sure you want to delete ?")) {
       this.onDeleteCallback(this.state);
     }
   }
@@ -71,7 +72,7 @@ export default class ProjectDetailForm extends Component {
           _id:{_id}
         </small>
         <div>
-          <label>Nome:</label>
+          <label>Name:</label>
           <input value={name} name="name" onChange={this.handleInputChange}/>
         </div>
         <div>
@@ -84,9 +85,9 @@ export default class ProjectDetailForm extends Component {
         </div>
 
         <div>
-          <button type="button" onClick={this.handleSubmit.bind(this)}>Salvar</button>
-          <button type="button" onClick={this.handleClose.bind(this)}>Fechar</button>
-          <button type="button" onClick={this.handleDelete.bind(this)}>Excluir</button>
+          <button type="button" onClick={this.handleSubmit.bind(this)}>Save</button>
+          <button type="button" onClick={this.handleClose.bind(this)}>Close</button>
+          <button type="button" onClick={this.handleDelete.bind(this)}>Delete!</button>
         </div>
       </div>
 

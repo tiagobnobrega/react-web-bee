@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
-// import thunk from 'redux-thunk';
+import { sagaMiddleware,initSagas } from './sagas-middleware'
 import promiseMiddleware from './promise-middleware';
 import axiosMiddleware from './axios-middleware';
 
@@ -17,10 +17,10 @@ const enhancers = [];
 
 //define middleware array
 const middleware = [
-  // thunk,
-  promiseMiddleware,
-  axiosMiddleware,
+  // promiseMiddleware,
+  // axiosMiddleware,
   routerMiddleware(history),
+  sagaMiddleware,
 ];
 
 if (process.env.NODE_ENV === 'development') {
@@ -41,5 +41,7 @@ const store = createStore(
   initialState,
   composedEnhancers
 );
+
+initSagas();
 
 export default store;

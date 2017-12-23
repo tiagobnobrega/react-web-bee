@@ -27,8 +27,10 @@ ctrl.config([
     path: 'remove',
     methods: 'POST,PUT,PATCH',
     run: async (ctx) => {
-      const ids = ctx.request.body;
-      const removed = await ProjectStore.remove(ids);
+      const codes = ctx.request.body;
+      console.log('removeCodes:', codes);
+
+      const removed = await Promise.all(codes.map(code => ProjectStore.removeQuery({ code })));
       ctx.body = { data: { count: removed } };
       ctx.status = 200;
     },

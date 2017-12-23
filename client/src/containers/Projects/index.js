@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actions } from '../../actions/projectsActions';
+import  * as actions from '../../actions';
 import ProjectDetailForm from '../../components/ProjectDetailForm';
+import bindAll from 'lodash/bindAll'
 
 // import './style.css';
 
@@ -13,6 +14,8 @@ class Projects extends React.Component {
 
   constructor(props){
     super(props);
+
+    bindAll(this,['handleSubmitSelectedProject','handleCloseSelectedProject','handleNewProject','handleRemoveSelectedProject'])
   }
 
   componentDidMount(){
@@ -25,15 +28,7 @@ class Projects extends React.Component {
   }
 
   handleSubmitSelectedProject(selectedProject){
-    this.props.saveProject(selectedProject)
-      .then(()=>{
-        this.props.getAllProjects();
-        this.props.getProjectByCode(selectedProject.code)
-    });
-      // .then(()=>this.props.getProjectByCode(selectedProject.code));
-
-    // this.props.getProjectByCode(code);
-    // console.log('selectedProject:',selectedProject);
+    this.props.saveAndReload(selectedProject);
   }
 
   handleCloseSelectedProject(){
@@ -41,6 +36,10 @@ class Projects extends React.Component {
   }
   handleNewProject(){
     this.props.setSelectedProject({code:'', name:'', isNew:true});
+  }
+  handleRemoveSelectedProject(){
+    console.log(this.props.selectedProject);
+    this.props.removeAndReload(this.props.selectedProject.code);
   }
 
   renderSelectedProject(selectedProject){
@@ -59,12 +58,13 @@ class Projects extends React.Component {
       return (
         <ProjectDetailForm
           project={selectedProject}
-          onSubmit={this.handleSubmitSelectedProject.bind(this)}
-          onClose={this.handleCloseSelectedProject.bind(this)}
+          onSubmit={this.handleSubmitSelectedProject}
+          onClose={this.handleCloseSelectedProject}
+          onDelete={this.handleRemoveSelectedProject}
         />
       )
     }else{
-      return <h3>Clique em um projeto acima para listar os detalhes</h3>
+      return <h3>Click on a project name to view details.</h3>
     }
   }
 
@@ -77,9 +77,9 @@ class Projects extends React.Component {
           {projects.isFetching ?
             <h3>loading...</h3>
             :
-            projects.all.map((p)=>{return (<div style={{cursor:'pointer'}} key={p.name}><h1 onClick={()=>{this.handleClickProject(p.code)}}>{p.name}</h1></div>)})}
+            projects.all.map((p)=>{return (<div style={{cursor:'pointer'}} key={p._id}><h1 onClick={()=>{this.handleClickProject(p.code)}}>{p.name}</h1></div>)})}
           {}
-          <button onClick={this.handleNewProject.bind(this)}>Incluir</button>
+          <button onClick={this.handleNewProject}>New Project</button>
         </div>
         <hr />
         <div>

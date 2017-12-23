@@ -5,11 +5,11 @@ import {handleActions} from 'redux-actions';
 export const INITIAL_STATE ={
   isFetchingLoad: false,
   isFetchingPost: false,
-  isNew: false
+  isNew: false,
 };
 
 export const HANDLERS = {
-  [TYPES.PROJECT_GET_ONE]: (state=INITIAL_STATE, {type, payload, meta} ) => {
+  [TYPES.PROJECT_GET_ONE_REQUEST]: (state=INITIAL_STATE, {type, payload, meta} ) => {
     return Object.assign({}, state, {isFetchingLoad: true});
   },
 
@@ -18,8 +18,7 @@ export const HANDLERS = {
   },
 
   [TYPES.PROJECT_GET_ONE_SUCCESS]: (state=INITIAL_STATE, {type, payload, meta}) => {
-    console.log(`action ${TYPES.PROJECT_GET_ONE_SUCCESS}:`, {type, payload, meta});
-    const projectData = payload.data.data[0];
+    const projectData = payload[0];
     return Object.assign({}, state, {
       isFetchingLoad: false,
       isNew: false,
@@ -27,7 +26,7 @@ export const HANDLERS = {
     });
   },
 
-  [TYPES.PROJECT_SAVE]: (state=INITIAL_STATE, {type, payload, meta}) => {
+  [TYPES.PROJECT_SAVE_REQUEST]: (state=INITIAL_STATE, {type, payload, meta}) => {
     return Object.assign({}, state, {isFetchingPost: true})
   },
 
@@ -36,6 +35,23 @@ export const HANDLERS = {
       isFetchingPost: false,
     });
   },
+
+  [TYPES.PROJECT_REMOVE_REQUEST]: (state=INITIAL_STATE, {type, payload, meta}) => {
+    return {
+      ...state,
+      isFetchingPost: true,
+    }
+  },
+
+  [TYPES.PROJECT_REMOVE_SUCCESS]: (state=INITIAL_STATE, {type, payload, meta}) => {
+    let nextState = {
+      ...state,
+      isNew: false,
+      isFetchingPost: false,
+    };
+    delete nextState.code;
+    return nextState
+  }
 };
 
 export default handleActions(HANDLERS,INITIAL_STATE);
