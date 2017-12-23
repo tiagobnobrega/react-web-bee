@@ -2,91 +2,31 @@
 
 ##Running the Project
 
-###npm Scripts
+###Scripts
 ####start
-Start server project only. Should be used for production.
+Start server project only. Should be used for production. Project must be built before use
     
-    npm start
+    yarn start
 ####dev
 Starts server project in dev mode (nodemon) and client project (webpack) with aggregated console
  
-     npm run dev
+     yarn run dev
 ####dev-split
    Starts server project in dev mode (nodemon) and client project (webpack) with splitted console
    
-    npm run dev-split
+    yarn run dev-split
 ####build
    Starts client webpack build process
 
-    npm run build
+    yarn run build
 
 ####dev-client
    Starts server project in production mode and client project (webpack)
 
-    npm run dev-client
+    yarn run dev-client
     
 ####dev-client
    Starts client project (webpack) only
        
-    npm run client
-    
-    
-##npm Configuration
-
-###Global npm configuration
-
-Don't create package-lock file | save by default | save exact version <br/>
-
-    npm config set package-lock false
-    npm config set save true
-    npm config set save-exact true
-
-##Webstorm configuration
-###Eslint fix command
-
-To configure eslint commend. eslint must be installed globally
-
-    npm install eslint -g
-
-We need to know install full path:
-
-    npm config get prefix
-
-full path is: "<NPM_PREFIX>\eslint"
- 
-Windows example: "C:\Program Files\nodejs\eslint.cmd"
-
-Access: File => Settings => Tools => External Tools
-
-Create new command
-
-<ESLINT_FULL_PATH> "$FilePath$" --fix
-
-* Parameter:
-  --fix "$FilePath$"
-* Working Directory:
-  $ProjectFileDir$
-  
-You can also register a keymap:
-
-Access: File => Settings => Keymap
-
-1. Find command in "External Tools"
-1. Add keyboard shortcut
-
-##Dev Tools Configurations
-
-Recomended packages:
-    
-#### nodemon
-    npm install -g nodemon
-    
-#### local ssl proxy
-    npm install -g local-ssl-proxy
-
-#### windows build tools
-(Run as admin)
-
-        npm install --global --production windows-build-tools
-        
+    yarn run client
  
