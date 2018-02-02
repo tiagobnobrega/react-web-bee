@@ -1,0 +1,27 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": ["react-app", "prettier", "prettier/react"],
+  "parser": "babel-eslint",
+  "plugins": ["react", "prettier", "babel"],
+  "rules": {
+    "react/jsx-filename-extension": [1, {
+      "extensions": [".js", ".jsx"]
+    }],
+    "babel/semi": 1,
+    "prefer-template": 2,
+    "jsx-a11y/anchor-is-valid": "off",
+    "react/prop-types": "off",
+    "no-use-before-define": "off",
+    "no-class-assign": "off",
+    "import/prefer-default-export": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "es5"
+      }
+    ]
+  }
+}
