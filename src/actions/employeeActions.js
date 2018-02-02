@@ -21,7 +21,7 @@ export const TYPES = {
   EMPLOYEE_REMOVE_FAIL: 'EMPLOYEE_REMOVE_FAIL',
 
   EMPLOYEE_REMOVE_AND_RELOAD: 'EMPLOYEE_REMOVE_AND_RELOAD',
-  EMPLOYEE_SAVE_AND_RELOAD: 'EMPLOYEE_SAVE_AND_RELOAD'
+  EMPLOYEE_SAVE_AND_RELOAD: 'EMPLOYEE_SAVE_AND_RELOAD',
 };
 
 const API_ROOT = '/api/employee';
@@ -29,36 +29,36 @@ const API_ROOT = '/api/employee';
 export const requestEmployee = () => ({ type: TYPES.EMPLOYEE_REQUEST });
 export const listEmployeesSuccess = employees => ({
   type: TYPES.EMPLOYEE_LIST_SUCCESS,
-  payload: employees
+  payload: employees,
 });
 export const listEmployeesFail = err => ({
   type: TYPES.EMPLOYEE_LIST_FAIL,
-  payload: err
+  payload: err,
 });
 
 export const getEmployeeSuccess = employee => ({
   type: TYPES.EMPLOYEE_GET_ONE_SUCCESS,
-  payload: employee
+  payload: employee,
 });
 export const getEmployeeFail = err => ({
   type: TYPES.EMPLOYEE_GET_ONE_FAIL,
-  payload: err
+  payload: err,
 });
 
 export const saveEmployeeSuccess = () => ({
-  type: TYPES.EMPLOYEE_SAVE_SUCCESS
+  type: TYPES.EMPLOYEE_SAVE_SUCCESS,
 });
 export const saveEmployeeFail = err => ({
   type: TYPES.EMPLOYEE_SAVE_FAIL,
-  payload: err
+  payload: err,
 });
 
 export const removeEmployeeSuccess = () => ({
-  type: TYPES.EMPLOYEE_REMOVE_SUCCESS
+  type: TYPES.EMPLOYEE_REMOVE_SUCCESS,
 });
 export const removeEmployeeFail = err => ({
   type: TYPES.EMPLOYEE_REMOVE_FAIL,
-  payload: err
+  payload: err,
 });
 
 export const listEmployees = () => {
