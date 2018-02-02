@@ -17,5 +17,5 @@ export {
   saveEmployee,
   saveEmployeeFail,
   saveEmployeeSuccess,
-  setSelectedEmployee,
+  setSelectedEmployee
 } from './employeeActions';

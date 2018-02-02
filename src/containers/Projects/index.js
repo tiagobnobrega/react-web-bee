@@ -1,9 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import  * as actions from '../../actions';
+import * as actions from '../../actions';
 import ProjectDetailForm from '../../components/ProjectDetailForm';
-import bindAll from 'lodash/bindAll'
+import bindAll from 'lodash/bindAll';
 
 // import './style.css';
 
@@ -12,49 +12,49 @@ class Projects extends React.Component {
   // static defaultProps = {}
   // state = {}
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
-    bindAll(this,['handleSubmitSelectedProject','handleCloseSelectedProject','handleNewProject','handleRemoveSelectedProject'])
+    bindAll(this, [
+      'handleSubmitSelectedProject',
+      'handleCloseSelectedProject',
+      'handleNewProject',
+      'handleRemoveSelectedProject'
+    ]);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getAllProjects();
   }
 
-  handleClickProject(code){
-    console.log('handleClickProject:',code);
+  handleClickProject(code) {
+    console.log('handleClickProject:', code);
     this.props.getProjectByCode(code);
   }
 
-  handleSubmitSelectedProject(selectedProject){
+  handleSubmitSelectedProject(selectedProject) {
     this.props.saveAndReload(selectedProject);
   }
 
-  handleCloseSelectedProject(){
+  handleCloseSelectedProject() {
     this.props.setSelectedProject({});
   }
-  handleNewProject(){
-    this.props.setSelectedProject({code:'', name:'', isNew:true});
+  handleNewProject() {
+    this.props.setSelectedProject({ code: '', name: '', isNew: true });
   }
-  handleRemoveSelectedProject(){
+  handleRemoveSelectedProject() {
     console.log(this.props.selectedProject);
     this.props.removeAndReload(this.props.selectedProject.code);
   }
 
-  renderSelectedProject(selectedProject){
-
-    if(selectedProject.isFetchingLoad) {
-      return (
-        <h3>loading...</h3>
-      )
+  renderSelectedProject(selectedProject) {
+    if (selectedProject.isFetchingLoad) {
+      return <h3>loading...</h3>;
     }
-    if(selectedProject.isFetchingPost) {
-      return (
-        <h3>posting...</h3>
-      )
+    if (selectedProject.isFetchingPost) {
+      return <h3>posting...</h3>;
     }
-    if(selectedProject && (selectedProject.code || selectedProject.isNew)) {
+    if (selectedProject && (selectedProject.code || selectedProject.isNew)) {
       return (
         <ProjectDetailForm
           project={selectedProject}
@@ -62,39 +62,49 @@ class Projects extends React.Component {
           onClose={this.handleCloseSelectedProject}
           onDelete={this.handleRemoveSelectedProject}
         />
-      )
-    }else{
-      return <h3>Click on a project name to view details.</h3>
+      );
+    } else {
+      return <h3>Click on a project name to view details.</h3>;
     }
   }
 
   render() {
-
     const { projects, selectedProject } = this.props;
     return (
       <div>
         <div>
-          {projects.isFetching ?
+          {projects.isFetching ? (
             <h3>loading...</h3>
-            :
-            projects.all.map((p)=>{return (<div style={{cursor:'pointer'}} key={p._id}><h1 onClick={()=>{this.handleClickProject(p.code)}}>{p.name}</h1></div>)})}
+          ) : (
+            projects.all.map(p => {
+              return (
+                <div style={{ cursor: 'pointer' }} key={p._id}>
+                  <h1
+                    onClick={() => {
+                      this.handleClickProject(p.code);
+                    }}
+                  >
+                    {p.name}
+                  </h1>
+                </div>
+              );
+            })
+          )}
           {}
           <button onClick={this.handleNewProject}>New Project</button>
         </div>
         <hr />
-        <div>
-          {this.renderSelectedProject(selectedProject)}
-        </div>
+        <div>{this.renderSelectedProject(selectedProject)}</div>
       </div>
     );
   }
 }
 
-function mapStateToProps({projects, selectedProject}) {
-  return {projects, selectedProject}
+function mapStateToProps({ projects, selectedProject }) {
+  return { projects, selectedProject };
 }
-function mapDispatchToProps(dispatch){
-  return bindActionCreators(actions ,dispatch);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);

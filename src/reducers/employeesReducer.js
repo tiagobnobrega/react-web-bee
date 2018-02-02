@@ -5,7 +5,7 @@ import { handleActions } from 'redux-actions';
 export const INITIAL_STATE = {
   data: [],
   one: {},
-  isFetching: false,
+  isFetching: false
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -17,21 +17,21 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         data: action.payload,
-        isFetching: false,
+        isFetching: false
       };
     }
     case TYPES.EMPLOYEE_GET_ONE_SUCCESS: {
       return {
         ...state,
         one: action.payload[0],
-        isFetching: false,
+        isFetching: false
       };
     }
     case TYPES.EMPLOYEE_REMOVE_SUCCESS: {
       return {
         ...state,
         one: {},
-        isFetching: false,
+        isFetching: false
       };
     }
 

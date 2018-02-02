@@ -20,7 +20,7 @@ class ListEmployees extends React.Component {
   }
 
   handleRemove = id => {
-    if(window.confirm('Tem certeza que deseja excluir ?')){
+    if (window.confirm('Tem certeza que deseja excluir ?')) {
       this.props.removeEmployee(id, this.props.listEmployees);
     }
   };
@@ -82,5 +82,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   getEmployee,
   listEmployees,
-  removeEmployee,
+  removeEmployee
 })(ListEmployees);
