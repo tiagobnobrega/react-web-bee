@@ -1,7 +1,7 @@
 {
-  "name": "cadastro-colaborador",
+  "name": "react-web-bee",
   "version": "1.0.0",
-  "description": "Cadastro Colaborador",
+  "description": "React boiler plate project",
   "main": "index.js",
   "proxy": "http://localhost:4000/",
   "devDependencies": {
