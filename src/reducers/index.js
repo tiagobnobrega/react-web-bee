@@ -5,6 +5,6 @@ import employeeReducer from './employeesReducer';
 
 const reducers = {
   routing: routerReducer,
-  employees: employeeReducer
+  employees: employeeReducer,
 };
 export default combineReducers(reducers);

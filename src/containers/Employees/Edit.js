@@ -12,7 +12,7 @@ class EditEmployee extends React.Component {
     _id: '',
     name: '',
     gender: '',
-    birthday: ''
+    birthday: '',
   };
 
   componentWillReceiveProps(nextProps) {
@@ -106,7 +106,7 @@ function mapStateToProps({ employees }, ownProps) {
   return {
     employees,
     id: ownProps.id || ownProps.match.params.id,
-    onSubmit: ownProps.onSubmit
+    onSubmit: ownProps.onSubmit,
   };
 }
 // function mapDispatchToProps(dispatch) {
@@ -116,5 +116,5 @@ function mapStateToProps({ employees }, ownProps) {
 export default connect(mapStateToProps, {
   changePage: route => push(`${route}`),
   getEmployee,
-  saveEmployee
+  saveEmployee,
 })(EditEmployee);

@@ -46,7 +46,7 @@ class AppSidebar extends React.Component {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      changePage: route => push(`/${route}`)
+      changePage: route => push(`/${route}`),
     },
     dispatch
   );

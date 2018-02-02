@@ -19,7 +19,7 @@ class Projects extends React.Component {
       'handleSubmitSelectedProject',
       'handleCloseSelectedProject',
       'handleNewProject',
-      'handleRemoveSelectedProject'
+      'handleRemoveSelectedProject',
     ]);
   }
 

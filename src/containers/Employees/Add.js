@@ -11,7 +11,7 @@ class AddEmployee extends React.Component {
   state = {
     name: '',
     gender: 'M',
-    birthday: ''
+    birthday: '',
   };
 
   handleChange = e => {
@@ -80,7 +80,7 @@ class AddEmployee extends React.Component {
 function mapStateToProps({ employees }, ownProps) {
   return {
     employees,
-    onSubmit: ownProps.onSubmit
+    onSubmit: ownProps.onSubmit,
   };
 }
 // function mapDispatchToProps(dispatch) {
@@ -89,5 +89,5 @@ function mapStateToProps({ employees }, ownProps) {
 
 export default connect(mapStateToProps, {
   changePage: route => push(`${route}`),
-  saveEmployee
+  saveEmployee,
 })(AddEmployee);

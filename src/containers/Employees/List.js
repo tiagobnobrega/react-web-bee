@@ -82,5 +82,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   getEmployee,
   listEmployees,
-  removeEmployee
+  removeEmployee,
 })(ListEmployees);
