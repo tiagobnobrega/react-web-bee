@@ -1,3 +1,21 @@
+Boilerplate project using React + KOA 2. 
+
+Features:
+- React
+- Redux
+- Sagas
+- Formik
+- Animations
+- Husky
+- Prettier
+
+
+## TODO IN README:
+-  List scripts
+- Basics of React project
+- Basics of koa mock project
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
