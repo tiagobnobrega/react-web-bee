@@ -1,18 +1,44 @@
 import React from 'react';
-import './style.css';
+import './style.scss';
 import logo from './logo.svg';
+import { Menu, Container, Image, Button, Icon } from 'semantic-ui-react';
 
 export default class Header extends React.Component {
-  doNotNavigate(event) {
-    event.preventDefault();
-    alert('Should not change context!');
-  }
-
   render() {
+    const { onToggleMenu, sidebarVisible } = this.props;
     return (
-      <div className="app-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </div>
+      <Menu fixed="top" inverted>
+        {!sidebarVisible ? (
+          <Button
+            className="sidebar-button"
+            color="black"
+            size="small"
+            onClick={onToggleMenu}
+          >
+            <Button.Content visible>
+              <Icon name="sidebar" />
+            </Button.Content>
+          </Button>
+        ) : (
+          <Button
+            className="sidebar-button"
+            color="black"
+            size="small"
+            onClick={onToggleMenu}
+          >
+            <Button.Content visible>
+              <Icon name="close" />
+            </Button.Content>
+          </Button>
+        )}
+
+        <Container fluid={true}>
+          <Menu.Item as="a" header>
+            <Image size="mini" src={logo} style={{ marginRight: '1.5em' }} />
+            My App
+          </Menu.Item>
+        </Container>
+      </Menu>
     );
   }
 }

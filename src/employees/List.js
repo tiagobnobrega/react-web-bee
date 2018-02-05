@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getEmployee, listEmployees, removeEmployee } from './_actions';
 import { Layout } from 'common/layout';
-
+import { Segment, Table, Button, Header } from 'semantic-ui-react';
 import './style.css';
 
 class ListEmployees extends React.Component {
@@ -16,7 +16,6 @@ class ListEmployees extends React.Component {
   }
 
   componentDidMount() {
-    console.log('calling listEmployees');
     this.props.listEmployees();
   }
 
@@ -30,16 +29,18 @@ class ListEmployees extends React.Component {
     const { employees } = this.props;
     return employees.data.map(e => {
       return (
-        <tr style={{ cursor: 'pointer' }} key={e._id}>
-          <td>
+        <Table.Row key={e._id}>
+          <Table.Cell>
             <Link to={`/employee/${e._id}`}>{e.name}</Link>
-          </td>
-          <td>{e.birthday}</td>
-          <td>{e.gender}</td>
-          <td>
-            <button onClick={() => this.handleRemove(e._id)}>Remover</button>
-          </td>
-        </tr>
+          </Table.Cell>
+          <Table.Cell>{e.birthday}</Table.Cell>
+          <Table.Cell>{e.gender}</Table.Cell>
+          <Table.Cell>
+            <Button negative onClick={() => this.handleRemove(e._id)}>
+              Remover
+            </Button>
+          </Table.Cell>
+        </Table.Row>
       );
     });
   };
@@ -48,27 +49,24 @@ class ListEmployees extends React.Component {
     const { employees } = this.props;
     return (
       <Layout>
-        <div className="employee-container">
-          <div>
-            {employees.isFetching ? (
-              <h3>loading...</h3>
-            ) : (
-              <table>
-                <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Data de Nascimento</th>
-                    <th>Sexo</th>
-                    <th />
-                  </tr>
-                </thead>
-                <tbody>{this.renderLines()}</tbody>
-              </table>
-            )}
-            <Link to={`/employee/add`}>Adicionar</Link>
-          </div>
-          <hr />
-          {/*<div>{this.renderSelectedProject(selectedProject)}</div>*/}
+        <div className="ui container fluid employee">
+          <Header>Employees</Header>
+          <Segment loading={employees.isFetching}>
+            <Table celled padded>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Nome</Table.HeaderCell>
+                  <Table.HeaderCell>Data de Nascimento</Table.HeaderCell>
+                  <Table.HeaderCell>Sexo</Table.HeaderCell>
+                  <Table.HeaderCell />
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>{this.renderLines()}</Table.Body>
+            </Table>
+            <Button primary as={Link} to={`/employee/add`}>
+              Adicionar
+            </Button>
+          </Segment>
         </div>
       </Layout>
     );

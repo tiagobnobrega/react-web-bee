@@ -1,11 +1,10 @@
 import React from 'react';
-import './style.css';
 import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { slide as Menu } from 'react-burger-menu';
+import { Sidebar, Menu, Segment, Icon } from 'semantic-ui-react';
 
 class AppSidebar extends React.Component {
   doNotNavigate(event) {
@@ -14,31 +13,55 @@ class AppSidebar extends React.Component {
   }
 
   render() {
-    const { ...props } = this.props;
+    const { visible, children, changePage } = this.props;
     return (
-      <Menu>
-        <Link className="menu-item" to="/home">
-          Home
-        </Link>
-        <Link className="menu-item" to="/about">
-          About
-        </Link>
-        <Link className="menu-item" to="/employee">
-          Employees
-        </Link>
-        <Link className="menu-item" to="/notDefinedRoute">
-          Not Found
-        </Link>
-        <a onClick={this.doNotNavigate} className="menu-item--small" href="">
-          No Navigation
-        </a>
-        <button
-          onClick={() => props.changePage('home')}
-          className="menu-item--small"
+      <Sidebar.Pushable as={Segment}>
+        <Sidebar
+          as={Menu}
+          animation="scale down"
+          width="thin"
+          visible={visible}
+          icon="labeled"
+          vertical
+          inverted
         >
-          Home via redux
-        </button>
-      </Menu>
+          <Menu.Item name="home">
+            <Icon name="home" />
+            <Link className="menu-item" to="/home">
+              Home
+            </Link>
+          </Menu.Item>
+          <Menu.Item name="about">
+            <Link className="menu-item" to="/about">
+              About
+            </Link>
+          </Menu.Item>
+          <Menu.Item name="employee">
+            <Link className="menu-item" to="/employee">
+              Employee
+            </Link>
+          </Menu.Item>
+          <Menu.Item name="notDefinedRoute">
+            <Link className="menu-item" to="/about">
+              Not Defined
+            </Link>
+          </Menu.Item>
+          <Menu.Item name="noNav">
+            <a onClick={this.doNotNavigate} href="">
+              No Navigation
+            </a>
+          </Menu.Item>
+          <Menu.Item name="button">
+            <button
+              onClick={() => changePage('home')}
+              className="menu-item--small"
+            >
+              Home via redux
+            </button>
+          </Menu.Item>
+        </Sidebar>
+        <Sidebar.Pusher>{children}</Sidebar.Pusher>
+      </Sidebar.Pushable>
     );
   }
 }

@@ -1,0 +1,30 @@
+$pushable-padding:49px;
+$content-padding:10px;
+.App {
+  & > .ui.segment.pushable {
+    margin-top: 0;
+    padding-top: $pushable-padding !important;
+    border:0;
+    border-radius: 0;
+    display: flex;
+    flex-flow: row wrap;
+    min-height:100vh;
+    .ui.sidebar{
+      padding-top:$pushable-padding;
+    }
+
+    &>.pusher{
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      flex-grow: 1;
+
+      .ui.container{
+        padding-left:$content-padding;
+        padding-right: $content-padding;
+        padding-top:$content-padding;
+      }
+    }
+  }
+}
+

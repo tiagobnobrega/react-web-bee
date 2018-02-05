@@ -1,78 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import { saveEmployee } from './_actions';
+import { Layout } from 'common/layout';
 
+import { Segment, Header } from 'semantic-ui-react';
+import AddEditForm from './components/AddEditForm';
 import './style.css';
 
 class AddEmployee extends React.Component {
   // static propTypes = {}
   // static defaultProps = {}
-  state = {
-    name: '',
-    gender: 'M',
-    birthday: '',
-  };
 
-  handleChange = e => {
-    const { target: { name, value } } = e;
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    const data = { ...this.state };
-    this.props.saveEmployee(data, this.props.onSubmit || this.redirectToList);
+  handleSubmit = data => {
+    this.props.saveEmployee(data, this.redirectToList);
   };
 
   redirectToList = () => {
-    this.props.changePage('./');
+    console.log('redirecting to /employee', this.props);
+    this.props.history.push('/employee');
   };
 
   render() {
     const { employees: { isFetching } } = this.props;
-    const { name, gender, birthday } = this.state;
-    if (isFetching) {
-      return <div>loading...</div>;
-    }
     return (
-      <div className="employee-container">
-        <div className="form-heading">Colaborador</div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">
-            <span>Nome</span>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label htmlFor="birthday">
-            <span>Aniversário</span>
-            <input
-              type="text"
-              name="birthday"
-              value={birthday}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label htmlFor="gender">
-            <span>Sexo</span>
-            <select name="gender" onChange={this.handleChange} value={gender}>
-              <option value="M">Masculino</option>
-              <option value="F">Feminino</option>
-              <option value="O">Outro</option>
-            </select>
-          </label>
-          <div>
-            <button type="submit">Salvar</button>
-            <button type="button" onClick={this.redirectToList}>
-              Cancelar
-            </button>
+      <Layout>
+        <Segment loading={isFetching}>
+          <div className="ui container fluid employee">
+            <Header>Colaborador</Header>
+            <AddEditForm onSubmit={this.handleSubmit} />
           </div>
-        </form>
-      </div>
+        </Segment>
+      </Layout>
     );
   }
 }
@@ -88,6 +46,5 @@ function mapStateToProps({ employees }, ownProps) {
 // }
 
 export default connect(mapStateToProps, {
-  changePage: route => push(`${route}`),
   saveEmployee,
 })(AddEmployee);

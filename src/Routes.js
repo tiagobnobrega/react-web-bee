@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import AuthenticatedRoute from './common/route/AuthenticatedRoute';
 import { isAuthenticated } from './common/helpers/authHelpers';
 
 import Home from './basics/Home';
@@ -47,20 +46,22 @@ authRoutes.routes = authRoutes.routes.map(r => ({
 }));
 
 class Routes extends Component {
-  runIsAuth = props => {
-    return isAuthenticated(this.props.state, props);
-  };
-
   render() {
     return (
       <Switch>
-        {authRoutes.routes.map(r => (
-          <AuthenticatedRoute
-            {...r}
-            key={r.path}
-            isAuthenticated={this.runIsAuth}
-          />
-        ))}
+        {authRoutes.routes.map(
+          r =>
+            isAuthenticated(this.props.state, r) ? (
+              <Route {...r} key={r.path || 'notFound'} />
+            ) : (
+              <Redirect
+                to={{
+                  pathname: authRoutes.unauthorizedRedirect,
+                  state: { from: this.props.location },
+                }}
+              />
+            )
+        )}
         {publicRoutes.routes.map(r => (
           <Route {...r} key={r.path || 'notFound'} />
         ))}
@@ -73,4 +74,4 @@ class Routes extends Component {
 function mapStateToProps(state) {
   return { state };
 }
-export default connect(mapStateToProps)(Routes);
+export default withRouter(connect(mapStateToProps)(Routes));
