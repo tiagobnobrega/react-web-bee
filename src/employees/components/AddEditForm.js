@@ -14,6 +14,14 @@ class AddEditForm extends Component {
     birthday: '',
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.initialValues &&
+      nextProps.initialValues !== this.props.initialValues
+    )
+      this.setState(nextProps.initialValues);
+  }
+
   handleChange = e => {
     const { target: { name, value } } = e;
     this.setState({ [name]: value });
@@ -34,12 +42,14 @@ class AddEditForm extends Component {
           name="name"
           control={Input}
           onChange={this.handleChange}
+          value={this.state.name}
         />
         <Form.Field
           label="Aniversário"
           name="birthday"
           control={Input}
           onChange={this.handleChange}
+          value={this.state.birthday}
         />
         <Form.Field
           label="Sexo"
@@ -47,6 +57,7 @@ class AddEditForm extends Component {
           options={options}
           control={Select}
           onChange={this.handleChange}
+          value={this.state.gender}
         />
         <div>
           <Button primary type="submit">

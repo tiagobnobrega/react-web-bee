@@ -19,7 +19,7 @@ const authRoutes = {
   routes: [
     { path: '/employee', exact: true, component: EmployeeList },
     { path: '/employee/add', exact: true, component: EmployeeAdd },
-    { path: '/employee/id', exact: true, component: EmployeeEdit },
+    { path: '/employee/:id', exact: true, component: EmployeeEdit },
   ],
 };
 

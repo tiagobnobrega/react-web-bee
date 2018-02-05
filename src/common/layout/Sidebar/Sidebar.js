@@ -6,14 +6,16 @@ import { bindActionCreators } from 'redux';
 
 import { Sidebar, Menu, Segment, Icon } from 'semantic-ui-react';
 
-class AppSidebar extends React.Component {
-  doNotNavigate(event) {
-    event.preventDefault();
-    alert('Should not change context!');
-  }
+const menuItems = [
+  { name: 'home', label: 'Home', to: '/home', iconName: 'home' },
+  { name: 'about', label: 'About', to: '/about' },
+  { name: 'employee', label: 'Employee', to: '/employee' },
+  { name: 'notDefined', label: 'Not Defined', to: '/notDefined' },
+];
 
+class AppSidebar extends React.Component {
   render() {
-    const { visible, children, changePage } = this.props;
+    const { visible, children } = this.props;
     return (
       <Sidebar.Pushable as={Segment}>
         <Sidebar
@@ -25,40 +27,12 @@ class AppSidebar extends React.Component {
           vertical
           inverted
         >
-          <Menu.Item name="home">
-            <Icon name="home" />
-            <Link className="menu-item" to="/home">
-              Home
-            </Link>
-          </Menu.Item>
-          <Menu.Item name="about">
-            <Link className="menu-item" to="/about">
-              About
-            </Link>
-          </Menu.Item>
-          <Menu.Item name="employee">
-            <Link className="menu-item" to="/employee">
-              Employee
-            </Link>
-          </Menu.Item>
-          <Menu.Item name="notDefinedRoute">
-            <Link className="menu-item" to="/about">
-              Not Defined
-            </Link>
-          </Menu.Item>
-          <Menu.Item name="noNav">
-            <a onClick={this.doNotNavigate} href="">
-              No Navigation
-            </a>
-          </Menu.Item>
-          <Menu.Item name="button">
-            <button
-              onClick={() => changePage('home')}
-              className="menu-item--small"
-            >
-              Home via redux
-            </button>
-          </Menu.Item>
+          {menuItems.map(e => (
+            <Menu.Item as={Link} to={e.to || ''} key={e.name}>
+              {e.icon && <Icon name={e.iconName} />}
+              {e.label}
+            </Menu.Item>
+          ))}
         </Sidebar>
         <Sidebar.Pusher>{children}</Sidebar.Pusher>
       </Sidebar.Pushable>
@@ -69,7 +43,7 @@ class AppSidebar extends React.Component {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      changePage: route => push(`/${route}`),
+      changePage: route => push(`${route}`),
     },
     dispatch
   );

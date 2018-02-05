@@ -11,10 +11,6 @@ class ListEmployees extends React.Component {
   // static defaultProps = {}
   // state = {}
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.listEmployees();
   }

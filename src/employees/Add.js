@@ -16,7 +16,6 @@ class AddEmployee extends React.Component {
   };
 
   redirectToList = () => {
-    console.log('redirecting to /employee', this.props);
     this.props.history.push('/employee');
   };
 
@@ -27,7 +26,10 @@ class AddEmployee extends React.Component {
         <Segment loading={isFetching}>
           <div className="ui container fluid employee">
             <Header>Colaborador</Header>
-            <AddEditForm onSubmit={this.handleSubmit} />
+            <AddEditForm
+              onSubmit={this.handleSubmit}
+              onCancel={this.redirectToList}
+            />
           </div>
         </Segment>
       </Layout>
