@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
@@ -13,7 +13,7 @@ const menuItems = [
   { name: 'notDefined', label: 'Not Defined', to: '/notDefined' },
 ];
 
-class AppSidebar extends React.Component {
+class AppSidebar extends Component {
   render() {
     const { visible, children } = this.props;
     return (
