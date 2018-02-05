@@ -1,27 +1,52 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { saveEmployee } from '../../actions';
+import { getEmployee, saveEmployee } from './_actions';
 
 import './style.css';
 
-class AddEmployee extends React.Component {
+class EditEmployee extends React.Component {
   // static propTypes = {}
   // static defaultProps = {}
   state = {
+    _id: '',
     name: '',
-    gender: 'M',
+    gender: '',
     birthday: '',
   };
+
+  componentWillReceiveProps(nextProps) {
+    console.log('Component will receive props');
+    const currId = this.props.id;
+    const nextId = nextProps.id;
+    if (nextId && currId !== nextId) {
+      console.log('currId DIFERENTE de nextId ');
+      this.props.getEmployee(nextId);
+    }
+    const currOne = this.props.employees.one;
+    const nextOne = nextProps.employees.one;
+    if ((currOne && currOne._id) !== (nextOne && nextOne._id)) {
+      console.log('currOne DIFERENTE de nextOne ');
+      console.log({ nextOne });
+      this.setState(nextOne);
+    }
+  }
+
+  componentDidMount() {
+    const { id } = this.props;
+    this.props.getEmployee(id);
+  }
 
   handleChange = e => {
     const { target: { name, value } } = e;
     this.setState({ [name]: value });
+    console.log(`changed ${name} to ${value}`);
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const data = { ...this.state };
+    data._id = this.props.id;
     this.props.saveEmployee(data, this.props.onSubmit || this.redirectToList);
   };
 
@@ -80,6 +105,7 @@ class AddEmployee extends React.Component {
 function mapStateToProps({ employees }, ownProps) {
   return {
     employees,
+    id: ownProps.id || ownProps.match.params.id,
     onSubmit: ownProps.onSubmit,
   };
 }
@@ -89,5 +115,6 @@ function mapStateToProps({ employees }, ownProps) {
 
 export default connect(mapStateToProps, {
   changePage: route => push(`${route}`),
+  getEmployee,
   saveEmployee,
-})(AddEmployee);
+})(EditEmployee);

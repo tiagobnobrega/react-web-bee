@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getEmployee, listEmployees, removeEmployee } from '../../actions';
+import { getEmployee, listEmployees, removeEmployee } from './_actions';
+import { Layout } from 'common/layout';
 
 import './style.css';
 
@@ -46,28 +47,30 @@ class ListEmployees extends React.Component {
   render() {
     const { employees } = this.props;
     return (
-      <div className="employee-container">
-        <div>
-          {employees.isFetching ? (
-            <h3>loading...</h3>
-          ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Data de Nascimento</th>
-                  <th>Sexo</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>{this.renderLines()}</tbody>
-            </table>
-          )}
-          <Link to={`/employee/add`}>Adicionar</Link>
+      <Layout>
+        <div className="employee-container">
+          <div>
+            {employees.isFetching ? (
+              <h3>loading...</h3>
+            ) : (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Data de Nascimento</th>
+                    <th>Sexo</th>
+                    <th />
+                  </tr>
+                </thead>
+                <tbody>{this.renderLines()}</tbody>
+              </table>
+            )}
+            <Link to={`/employee/add`}>Adicionar</Link>
+          </div>
+          <hr />
+          {/*<div>{this.renderSelectedProject(selectedProject)}</div>*/}
         </div>
-        <hr />
-        {/*<div>{this.renderSelectedProject(selectedProject)}</div>*/}
-      </div>
+      </Layout>
     );
   }
 }

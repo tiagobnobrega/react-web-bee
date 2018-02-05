@@ -5,29 +5,35 @@ import { connect } from 'react-redux';
 import AuthenticatedRoute from './common/route/AuthenticatedRoute';
 import { isAuthenticated } from './common/helpers/authHelpers';
 
-import Home from './containers/Home';
-import About from './containers/About';
-import NotFound from './containers/NotFound';
+import Home from './basics/Home';
+import About from './basics/About';
+import NotFound from './basics/NotFound';
+import Login from './basics/Login';
 
-const publicRoutes = {
-  baseUri: '',
-  routes: [
-    { path: '/', exact: true, component: Home },
-    { path: '/home', exact: true, component: Home },
-    { path: '/about', exact: true, component: About },
-
-    //defaults to not found. Should be last.
-    { component: NotFound },
-  ],
-};
+import EmployeeList from './employees/List';
+import EmployeeAdd from './employees/Add';
+import EmployeeEdit from './employees/Edit';
 
 const authRoutes = {
   baseUri: '',
   unauthenticatedRedirect: '/login',
   routes: [
-    { path: '/employee', exact: true, component: Home },
-    { path: '/employee/add', exact: true, component: Home },
-    { path: '/employee/id', exact: true, component: Home },
+    { path: '/employee', exact: true, component: EmployeeList },
+    { path: '/employee/add', exact: true, component: EmployeeAdd },
+    { path: '/employee/id', exact: true, component: EmployeeEdit },
+  ],
+};
+
+const publicRoutes = {
+  baseUri: '',
+  routes: [
+    { path: '/', exact: true, component: Home },
+    { path: '/login', exact: true, component: Login },
+    { path: '/home', exact: true, component: Home },
+    { path: '/about', exact: true, component: About },
+
+    //defaults to not found. Should be last.
+    { component: NotFound },
   ],
 };
 
@@ -48,16 +54,15 @@ class Routes extends Component {
   render() {
     return (
       <Switch>
-        {publicRoutes.routes.map(r => (
-          <Route {...r} key={r.path || 'notFound'} />
-        ))}
-
         {authRoutes.routes.map(r => (
           <AuthenticatedRoute
             {...r}
             key={r.path}
             isAuthenticated={this.runIsAuth}
           />
+        ))}
+        {publicRoutes.routes.map(r => (
+          <Route {...r} key={r.path || 'notFound'} />
         ))}
       </Switch>
     );

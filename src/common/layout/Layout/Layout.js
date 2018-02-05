@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import './style.css';
-import Sidebar from './Sidebar';
-import Header from './Header';
+import './Layout.css';
+import Sidebar from 'common/layout/Sidebar/Sidebar';
+import Header from 'common/layout/Header/Header';
 
 const Layout = ({ children }) => (
   <div className="App" id="app-outer-container">
     <Sidebar />
     <div className="app-content-container">
       <Header />
-      <main>{this.props.children}</main>
+      <main>{children}</main>
     </div>
   </div>
 );

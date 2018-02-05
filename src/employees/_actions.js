@@ -107,7 +107,3 @@ export const removeEmployee = (id, onSuccess) => {
       .catch(err => dispatch(removeEmployeeFail(err)));
   };
 };
-
-// export const removeEmployee = createAction(TYPES.EMPLOYEE_REMOVE, code => ({
-//   code,
-// }));

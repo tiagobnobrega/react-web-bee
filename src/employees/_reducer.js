@@ -1,5 +1,4 @@
-import { TYPES } from '../actions/actionTypes';
-import { handleActions } from 'redux-actions';
+import { TYPES } from './_actions';
 
 // the initial state of this reducer
 export const INITIAL_STATE = {
